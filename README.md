@@ -1,2 +1,2 @@
 # Algo_Trading
- analysis of Indian stocks to provide stock recommendations
+ Analysis of Indian stocks to provide stock recommendations.
