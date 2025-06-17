@@ -77,4 +77,9 @@ def fetch_company_essentials_from_ticker(symbol: str) -> dict:
             data[k] = None
         if f"{k}_raw" not in data:
             data[f"{k}_raw"] = None
+
+
+    # for debugging purposes, we can print the data
+    # print(data)
+    
     return data
