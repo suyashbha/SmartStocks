@@ -1,0 +1,230 @@
+.watchlists {
+  max-width: 1000px;      /* a bit wider */
+  margin: 50px auto;     /* more vertical space */
+  padding: 32px;         /* more inner padding */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+.watchlists h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1.25rem;
+}
+
+.watchlists .watchlist-select {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  row-gap: 8px;
+  margin: 10px 0;
+}
+
+.watchlists .watchlist-select label {
+  font-size: 0.875rem;       /* smaller than body text */
+  font-weight: 500;
+  color: #6B7280;            /* muted gray */
+  display: block;
+}
+
+
+.watchlists .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+
+  background: transparent;
+  border: 1px solid transparent;
+  transition: 
+    background-color 0.2s, 
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.add-stock {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+}
+
+
+/* PRIMARY (outline) */
+.watchlists .btn-primary {
+  color: #4F8FCC;
+  border-color: #4F8FCC;
+}
+.watchlists .btn-primary:hover {
+  background: #4F8FCC;
+  color: #ffffff;
+}
+
+/* DANGER (outline) */
+.watchlists .btn-danger {
+  color: #F28B82;
+  border-color: #F28B82;
+}
+.watchlists .btn-danger:hover {
+  background: #F28B82;
+  color: #ffffff;
+}
+
+.add-stock {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 100;
+}
+
+.suggestion-item {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f3f4f6;
+}
+
+.watchlists .watchlist-box li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #F9FAFB;
+  margin-bottom: 0.5rem;
+
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.watchlists .watchlist-box .stock-info{
+  text-decoration: none;
+}
+.watchlists .watchlist-box .stock-info:hover{
+  text-decoration: underline;
+}
+.watchlists .watchlist-box li:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  transform: translateY(-2px);
+}
+
+.watchlists .watchlist-box li .stock-name {
+  font-weight: 600;
+  text-decoration: none;
+  color: #1F2937;
+}
+.watchlists .watchlist-box li .company-name {
+  font-weight: 400;
+  text-decoration: none;
+  color: #4B5563;
+}
+
+/* Replace “Remove” text‑button with an icon button */
+.watchlists .btn-remove {
+  background: transparent;
+  border: none;
+  padding: 4px; /* adds a better hover area */
+  border-radius: 50%; /* circular hover effect */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watchlists .btn-remove:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Icon base */
+.watchlists .deleteIcon {
+  width: 20px;
+  height: 20px;
+  margin:2px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: brightness(1); /* base color */
+}
+
+/* Icon hover effect */
+.watchlists .btn-remove:hover .deleteIcon {
+  transform: scale(1.2);
+  filter: brightness(0.8); /* slightly deeper color tone */
+}
+
+
+.empty-card {
+  text-align: center;
+  background: #f9fafb;
+  padding: 10%;
+  border-radius: 10px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+

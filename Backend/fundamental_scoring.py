@@ -13,9 +13,8 @@ def evaluate_fundamentals(data):
         "promoter_holding": 5,
         "book_value": 5
     }
-
-    # Scoring functions
     def score_pe(pe):
+        if pe is None: return 0
         if pe < 10: return 90
         elif pe < 20: return 75
         elif pe < 30: return 50
@@ -23,17 +22,27 @@ def evaluate_fundamentals(data):
         else: return 10
 
     def score_pb(pb):
+        if pb is None: return 0
         if pb < 1: return 90
         elif pb < 2: return 75
         elif pb < 3: return 50
         elif pb < 5: return 30
         else: return 10
 
-    def score_roe(roe): return min(max(roe * 100, 0), 100)
-    def score_roce(roce): return min(max(roce * 100, 0), 100)
-    def score_eps(eps): return min(eps * 3, 100)
+    def score_roe(roe):
+        if roe is None: return 0
+        return min(max(roe * 100, 0), 100)
+
+    def score_roce(roce):
+        if roce is None: return 0
+        return min(max(roce * 100, 0), 100)
+
+    def score_eps(eps):
+        if eps is None: return 0
+        return min(eps * 3, 100)
 
     def score_sales_growth(sg):
+        if sg is None: return 0
         if sg > 0.2: return 90
         elif sg > 0.1: return 70
         elif sg > 0: return 50
@@ -41,26 +50,46 @@ def evaluate_fundamentals(data):
         else: return 10
 
     def score_profit_growth(pg):
+        if pg is None: return 0
         if pg > 0.3: return 90
         elif pg > 0.15: return 70
         elif pg > 0: return 50
         elif pg > -0.1: return 30
         else: return 10
 
-    def score_dividend_yield(dy): return min(dy * 100 * 2, 100)
+    def score_dividend_yield(dy):
+        if dy is None: return 0
+        return min(dy * 100 * 2, 100)
 
     def score_debt_to_equity(dte):
+        if dte is None: return 0
         if dte < 0.3: return 90
         elif dte < 0.5: return 70
         elif dte < 1: return 50
         elif dte < 2: return 30
         else: return 10
 
-    def score_promoter_holding(ph): return min(ph * 100, 100)
-    def score_book_value(bv): return min(bv, 100)
+    def score_promoter_holding(ph):
+        if ph is None: return 0
+        return min(ph * 100, 100)
+
+    def score_book_value(bv):
+        if bv is None: return 0
+        return min(bv, 100)
+
 
     # Derived metric
-    debt_to_equity = data["DEBT"] / (data["BOOK_VALUE_TTM"] * data["NO_OF_SHARES"])
+    try:
+        if (
+            data["debt"] is not None and
+            data["book_value"] not in (None, 0) and
+            data["no_of_shares"] not in (None, 0)
+        ):
+            debt_to_equity = data["DEBT"] / (data["BOOK_VALUE"] * data["NO_OF_SHARES"])
+        else:
+            debt_to_equity = None
+    except Exception:
+        debt_to_equity = None
 
     # Score calculation
     scores = {
@@ -76,6 +105,7 @@ def evaluate_fundamentals(data):
         "promoter_holding": score_promoter_holding(data["PROMOTER_HOLDING"]),
         "book_value": score_book_value(data["BOOK_VALUE_TTM"])
     }
+
 
     # Weighted average score
     total_score = sum(scores[factor] * weights[factor] for factor in weights)

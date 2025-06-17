@@ -1,0 +1,132 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 6px 24px;
+}
+
+.nav-title {
+  padding-left: 30px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #2e2e2e;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-links a {
+  color: #606f7b;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+.nav-links a.active {
+  color: #2980b9;
+  font-weight: 600;
+  border-bottom: 2px solid #2980b9;
+  padding-bottom: 2px;
+}
+
+
+.nav-links a:hover {
+  color: #295d8a;
+  border-bottom-color: #295d8a;
+}
+
+
+.user {
+  font-weight: 600;
+  color: #2e2e2e;
+  padding-left: 20px;
+}
+
+.logout {
+  background-color: #f3f4f6;        /* light neutral */
+  color: #dc2626;                   /* subtle red for text */
+  border: 1px solid #dc2626;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout:hover {
+  background-color: #fef2f2;        /* soft pinkish-gray */
+  color: #b91c1c;                   /* a little deeper red, not full-on */
+  border-color: #b91c1c;
+}
+
+
+
+
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2e2e2e;
+  outline: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05); /* subtle tap effect on mobile */
+  transition: background-color 0.2s ease;
+}
+
+.hamburger:focus,
+.hamburger:active,
+.hamburger:hover {
+  background-color: rgba(0, 0, 0, 0.06); /* clean light grey */
+  color: #2e2e2e;
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+  .user{
+    padding-left: 0px;
+  }
+  .nav-title {
+    padding-left: 0;
+    font-size: 24px;
+  }
+  .logout {
+  align-self: center;
+  margin-top: 8px;
+}
+
+
+}
