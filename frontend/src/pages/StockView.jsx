@@ -4,6 +4,8 @@ import axios from "axios";
 import stockList from "../companies.js";
 import "./StockView.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 function StockView() {
   const { symbol } = useParams();
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ function StockView() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/recommend/${symbol}`, {
+      const res = await axios.get(`${API_BASE}/recommend/${symbol}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       // attach name from stockList

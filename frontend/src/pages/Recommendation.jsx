@@ -4,6 +4,8 @@ import Fuse from "fuse.js";
 import stockList from "../companies.js";
 import "./Recommendation.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 const fuse = new Fuse(stockList, {
   keys: [
     { name: "name", weight: 0.6 },
@@ -60,7 +62,7 @@ export default function Recommendation() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:8000/recommend/${selectedStock.symbol}`,
+        `${API_BASE}/recommend/${selectedStock.symbol}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

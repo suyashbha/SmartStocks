@@ -8,6 +8,7 @@ import "./Watchlists.css";
 import trashIcon from "../assets/trash.svg";
 import Select from "react-select";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
 const fuse = new Fuse(stockList, {
   keys: [
     { name: "name", weight: 0.6 },
@@ -33,6 +34,11 @@ function Watchlists() {
   const [suggestions, setSuggestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedStock, setSelectedStock] = useState(null);
+  const [error, setError] = useState(null);
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [renameName, setRenameName] = useState("");
+  const [renameError, setRenameError] = useState(null);
+  const [renameId, setRenameId] = useState(null);
 
   const suggestionsRef = useRef(null);
 
@@ -42,7 +48,7 @@ function Watchlists() {
   };
 
   const fetchLists = async () => {
-    const res = await axios.get("http://localhost:8000/watchlists", {
+    const res = await axios.get(`${API_BASE}/watchlists`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setWatchlists(res.data);
@@ -52,30 +58,82 @@ function Watchlists() {
   };
 
   const createList = async () => {
-    if (!newName.trim()) return;
-    await axios.post(
-      "http://localhost:8000/watchlists",
-      { name: newName },
-      { headers: { Authorization: `Bearer ${token}` } }
+    const trimmedName = newName.trim();
+
+    if (!trimmedName) {
+      setError("Name cannot be empty.");
+      return;
+    }
+
+    const duplicate = watchlists.some(
+      (wl) => wl.name.toLowerCase() === trimmedName.toLowerCase()
     );
-    setNewName("");
-    setShowModal(false);
-    fetchLists();
+
+    if (duplicate) {
+      setError("A watchlist with this name already exists.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${API_BASE}/watchlists`,
+        { name: trimmedName },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setNewName("");
+      setError(null); // clear any previous error
+      setShowModal(false);
+      fetchLists();
+    } catch (err) {
+      console.error(err);
+      setError("Failed to create watchlist.");
+    }
   };
 
-  const renameList = async (id) => {
-    const name = prompt("New watchlist name:");
-    if (!name?.trim()) return;
+  const renameList = (id) => {
+  const list = watchlists.find((wl) => wl.id === id);
+  if (!list) return;
+  setRenameName(list.name);
+  setRenameError(null);
+  setRenameId(id);
+  setShowRenameModal(true);
+};
+
+const submitRename = async () => {
+  const trimmed = renameName.trim();
+  if (!trimmed) {
+    setRenameError("Name cannot be empty.");
+    return;
+  }
+
+  const duplicate = watchlists.some(
+    (wl) =>
+      wl.name.toLowerCase() === trimmed.toLowerCase() &&
+      wl.id !== renameId
+  );
+
+  if (duplicate) {
+    setRenameError("A watchlist with this name already exists.");
+    return;
+  }
+
+  try {
     await axios.put(
-      `http://localhost:8000/watchlists/${id}`,
-      { name },
+      `${API_BASE}/watchlists/${renameId}`,
+      { name: trimmed },
       { headers: { Authorization: `Bearer ${token}` } }
     );
+    setShowRenameModal(false);
     fetchLists();
-  };
+  } catch (err) {
+    console.error(err);
+    setRenameError("Rename failed.");
+  }
+};
+
 
   const deleteList = async (id) => {
-    await axios.delete(`http://localhost:8000/watchlists/${id}`, {
+    await axios.delete(`${API_BASE}/watchlists/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchLists();
@@ -83,10 +141,9 @@ function Watchlists() {
   };
 
   const removeStock = async (wid, symbol) => {
-    await axios.delete(
-      `http://localhost:8000/watchlists/${wid}/stocks/${symbol}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    await axios.delete(`${API_BASE}/watchlists/${wid}/stocks/${symbol}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     fetchLists();
   };
 
@@ -94,7 +151,7 @@ function Watchlists() {
     if (!selectedListId || !symbol) return;
 
     axios.post(
-      `http://localhost:8000/watchlists/${currentList.id}/stocks`,
+      `${API_BASE}/watchlists/${currentList.id}/stocks`,
       {
         symbol: selectedStock.symbol,
         name: selectedStock.name,
@@ -169,7 +226,6 @@ function Watchlists() {
   const selectedOption =
     options.find((opt) => opt.value === selectedListId) || null;
 
-    
   return (
     <div className="watchlists">
       <h2>Your Watchlists</h2>
@@ -274,13 +330,52 @@ function Watchlists() {
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
             />
+            {error && <div className="error-text">{error}</div>}
             <div className="modal-actions">
               <button className="btn btn-primary" onClick={createList}>
                 Create
               </button>
               <button
                 className="btn btn-primary"
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setError(null);
+                  setNewName("");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showRenameModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Rename Watchlist</h3>
+            <input
+              type="text"
+              placeholder="Enter new name"
+              value={renameName}
+              onChange={(e) => {
+                setRenameName(e.target.value);
+                setRenameError(null);
+              }}
+            />
+            {renameError && <div className="error-text">{renameError}</div>}
+            <div className="modal-actions">
+              <button
+                className="btn btn-primary"
+                onClick={submitRename}
+              >
+                Save
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  setShowRenameModal(false);
+                  setRenameError(null);
+                }}
               >
                 Cancel
               </button>
@@ -377,7 +472,9 @@ function Watchlists() {
           )}
         </>
       ) : (
-        <p className="empty">No watchlists available. Create one above!</p>
+        <p className="empty">
+          No watchlists selected. Select or create new above!
+        </p>
       )}
     </div>
   );

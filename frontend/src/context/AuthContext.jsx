@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
@@ -20,18 +22,18 @@ export function AuthProvider({ children }) {
 
   // Regular login
   const login = async ({ username, password }) => {
-    const res = await axios.post('http://localhost:8000/login', { username, password });
+    const res = await axios.post(`${API_BASE}/login`, { username, password });
     saveUserFromToken(res.data.access_token);
   };
 
   // Register new user
   const register = async ({ username, password, name }) => {
-    const res = await axios.post('http://localhost:8000/register', { username, password, name });
+    const res = await axios.post(`${API_BASE}/register`, { username, password, name });
     saveUserFromToken(res.data.access_token);
   };
 
 const googleLogin = async (tokenId) => {
-  const res = await axios.post('http://localhost:8000/google-login', { token: tokenId });
+  const res = await axios.post(`${API_BASE}/google-login`, { token: tokenId });
   saveUserFromToken(res.data.access_token);
 };
 

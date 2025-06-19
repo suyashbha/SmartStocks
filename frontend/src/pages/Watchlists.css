@@ -226,6 +226,12 @@
   gap: 12px;
   margin-top: 16px;
 }
+.error-text {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
 
 
 
