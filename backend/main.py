@@ -7,7 +7,7 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
-from bson import ObjectId
+from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
 from fundamental_scoring import evaluate_fundamentals

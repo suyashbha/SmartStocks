@@ -58,15 +58,33 @@ def fetch_company_essentials_from_ticker(symbol: str) -> dict:
             return None
 
     data = {}
+    
     for block in blocks:
+        if not isinstance(block, Tag):
+            continue
+
         label_tag = block.find("small")
         value_tag = block.find("p")
-        if not label_tag or not value_tag:
+
+        if not isinstance(label_tag, Tag) or not isinstance(value_tag, Tag):
             continue
+
         raw_label = label_tag.get_text(separator=" ", strip=True).upper()
-        clean_label = raw_label.replace("(", "").replace(")", "").replace(".", "").replace(":", "").replace("  ", " ").replace("%", "").strip().replace(" ", "_")
+        clean_label = (
+            raw_label.replace("(", "")
+            .replace(")", "")
+            .replace(".", "")
+            .replace(":", "")
+            .replace("  ", " ")
+            .replace("%", "")
+            .strip()
+            .replace(" ", "_")
+        )
+
         key = label_map.get(clean_label)
+
         raw_value = " ".join(value_tag.get_text(separator=" ", strip=True).split())
+
         if key:
             parsed_value = parse_number(raw_value)
             data[key] = parsed_value if isinstance(parsed_value, float) or parsed_value is None else None
