@@ -80,6 +80,6 @@ def fetch_company_essentials_from_ticker(symbol: str) -> dict:
 
 
     # for debugging purposes, we can print the data
-    # print(data)
+    print(data)
     
     return data

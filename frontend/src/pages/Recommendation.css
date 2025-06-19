@@ -104,6 +104,7 @@
 }
 
 .recommend-page .search-button {
+  margin-top:1rem;
   display: inline-block;
   padding: 0.65rem 1.6rem;
   font-size: 1rem;
@@ -272,6 +273,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (min-width: 768px) {
+  .result-container {
+    align-items: center;   /* true vertical center on wider viewports */
+    min-height: calc(100vh - 200px);
+  }
+}
 /* ERROR MESSAGE */
 .recommend-page .error-text {
   color: #d9534f;
@@ -297,4 +305,65 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* 1. Always keep the outer box visible */
+.result-container {
+  /* push it down a bit, center on larger screens */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* padding: 40px 0; */
+}
+
+/* 2. Your existing result-box styling stays, e.g.: */
+.result-box {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-height: 280px; /* so it doesn’t collapse */
+  overflow: hidden;   /* for the overlay */
+}
+
+/* 3. When it’s “empty”, show the overlay */
+.result-box.empty .empty-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);   /* a touch more opaque */
+  backdrop-filter: blur(6px);             /* stronger blur */
+  animation: fadeInOverlay 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* 4. Style the empty-state content */
+.empty-content svg {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  stroke: #9CA3AF;       /* gray-400 */
+}
+
+.empty-content h2 {
+  font-size: 1.5rem;
+  color: #111827;        /* gray-900 */
+  margin-bottom: 6px;
+}
+
+.empty-content p {
+  color: #6B7280;        /* gray-500 */
+  font-size: 1rem;
+}
+
+
 

@@ -1,0 +1,226 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+
+.result-box,
+.result-header,
+.result-grid {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto; /* keep centering */
+  padding: 0 1rem;
+}
+
+/* RESULT BOX */
+.result-box {
+  width: 95%;
+  max-width: 1000px;
+  margin: 0rem auto;
+  padding: 1.5rem 2rem;
+  padding-top: 0;
+  background: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* RESULT HEADER (Heading + Verdict) */
+.result-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.result-name {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+/* VERDICT BADGE */
+.recommendation-box {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  min-width: 180px;
+  text-align: center;
+  height: fit-content;
+}
+
+.recommendation-box.strong-buy {
+  background: #e6f4ea;
+  color: #1f553f;
+}
+
+.recommendation-box.buy {
+  background: #f0f8f1;
+  color: #236b45;
+}
+
+.recommendation-box.hold {
+  background: #fffafb;
+  color: #6a5a1d;
+}
+
+.recommendation-box.sell {
+  background: #fff5f5;
+  color: #8b1c1c;
+}
+
+.recommendation-box.strong-sell {
+  background: #fdecea;
+  color: #7a1818;
+}
+
+.recommendation-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-box:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.fundamentals-heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 2rem 0 1rem;
+  padding: 0 4rem;
+  text-align: left;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* FUNDAMENTALS GRID */
+.result-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.result-grid > div {
+  flex: 1 1 calc(33.33% - 1rem);
+  min-width: 200px;
+  padding: 0.6rem 1rem;
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: none;
+  font-size: 0.95rem;
+  color: #1f2937;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-grid > div strong {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+  font-size: 0.87rem;
+}
+
+.result-grid > div span {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+  
+}
+
+@media (min-width: 768px) {
+  .result-container {
+    align-items: center; /* true vertical center on wider viewports */
+    min-height: calc(100vh - 200px);
+  }
+}
+/* ERROR MESSAGE */
+.error-text {
+  color: #d9534f;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.loader {
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #2980b9;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 1. Always keep the outer box visible */
+.result-container {
+  /* push it down a bit, center on larger screens */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* padding: 40px 0; */
+}
+
+/* 2. Your existing result-box styling stays, e.g.: */
+.result-box {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-height: 280px; /* so it doesn’t collapse */
+  overflow: hidden; /* for the overlay */
+}
+.button-container {
+  width: 95%;
+  max-width: 1000px;
+  margin: 0rem auto;
+  display: flex;
+  align-items: center;
+}
+
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: #4F8FCC;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background: rgba(79, 143, 204, 0.1);
+}
+
