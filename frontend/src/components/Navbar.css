@@ -8,16 +8,45 @@
 }
 
 .nav-title {
-  padding-left: 30px;
   font-size: 30px;
   font-weight: 700;
   color: #2e2e2e;
 }
+.left{
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
 
 .nav-links {
   display: flex;
   align-items: center;
   gap: 1.2rem;
+}
+.dark-toggle {
+  background: none;
+  border: none;
+  padding: 10px 10px;
+  margin: 0%;
+  margin-right: 2rem;
+  width: min-content;
+  height: min-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50px;
+  align-self: center;
+}
+.dark-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* subtle hover effect */
+  border-radius: 50px;
+}
+.dark-toggle img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
 }
 
 .nav-links a {
@@ -34,12 +63,10 @@
   padding-bottom: 2px;
 }
 
-
 .nav-links a:hover {
   color: #295d8a;
   border-bottom-color: #295d8a;
 }
-
 
 .user {
   font-weight: 600;
@@ -48,8 +75,8 @@
 }
 
 .logout {
-  background-color: #f3f4f6;        /* light neutral */
-  color: #dc2626;                   /* subtle red for text */
+  background-color: #f3f4f6; /* light neutral */
+  color: #dc2626; /* subtle red for text */
   border: 1px solid #dc2626;
   padding: 8px 14px;
   border-radius: 6px;
@@ -60,13 +87,10 @@
 }
 
 .logout:hover {
-  background-color: #fef2f2;        /* soft pinkish-gray */
-  color: #b91c1c;                   /* a little deeper red, not full-on */
+  background-color: #fef2f2; /* soft pinkish-gray */
+  color: #b91c1c; /* a little deeper red, not full-on */
   border-color: #b91c1c;
 }
-
-
-
 
 .hamburger {
   display: none;
@@ -78,7 +102,12 @@
   outline: none;
   padding: 4px 8px;
   border-radius: 6px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05); /* subtle tap effect on mobile */
+  -webkit-tap-highlight-color: rgba(
+    0,
+    0,
+    0,
+    0.05
+  ); /* subtle tap effect on mobile */
   transition: background-color 0.2s ease;
 }
 
@@ -91,13 +120,14 @@
   box-shadow: none;
 }
 
-
-
 /* Mobile styles */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
   }
+  .left{
+  padding-left: 0rem;
+}
 
   .nav-links {
     display: none;
@@ -116,7 +146,7 @@
   .nav-links.open {
     display: flex;
   }
-  .user{
+  .user {
     padding-left: 0px;
   }
   .nav-title {
@@ -124,9 +154,17 @@
     font-size: 24px;
   }
   .logout {
-  align-self: center;
-  margin-top: 8px;
+    align-self: center;
+    margin-top: 8px;
+  }
+  .dark-toggle {
+    margin-right: 0;
+  }
+  .navbar {
+    padding: 6px 10px;
+  }
 }
-
-
+.right {
+  display: flex;
+  flex-direction: row;
 }

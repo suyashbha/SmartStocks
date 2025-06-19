@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './Navbar.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import "./Navbar.css";
 import { NavLink } from "react-router-dom";
-
+import DarkModeToggle from "./DarkModeToggle";
+import icon from "../../icon.svg";
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -23,15 +24,29 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h1 className="nav-title">SmartStocks</h1>
-      <button className="hamburger" onClick={toggleMenu}>
-        ☰
-      </button>
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <NavLink to="/" onClick={() => setMenuOpen(false)}>Watchlists</NavLink>
-        <NavLink to="/recommend" onClick={() => setMenuOpen(false)}>Recommendations</NavLink>
-        <span className="user">Hi, {user?.name}</span>
-        <button className="logout" onClick={handleLogout}>Logout</button>
+      <div className="left">
+        <NavLink to="/" className="logo">
+          <img src={icon} alt="SmartStocks Logo" />
+        </NavLink>
+        <h1 className="nav-title">SmartStocks</h1>
+      </div>
+      <div className="right">
+        <DarkModeToggle />
+        <button className="hamburger" onClick={toggleMenu}>
+          ☰
+        </button>
+        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <NavLink to="/" onClick={() => setMenuOpen(false)}>
+            Watchlists
+          </NavLink>
+          <NavLink to="/recommend" onClick={() => setMenuOpen(false)}>
+            Recommendations
+          </NavLink>
+          <span className="user">Hi, {user?.name.split(" ")[0]}</span>
+          <button className="logout" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
   );

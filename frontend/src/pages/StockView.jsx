@@ -28,6 +28,12 @@ function StockView() {
   useEffect(() => {
     fetchData();
   }, [symbol]);
+  
+  
+  useEffect(() => {
+    document.title = symbol ? `${symbol.toUpperCase()} | SmartStocks` : "SmartStocks";
+  }, [symbol]);
+  
 
 
   return (

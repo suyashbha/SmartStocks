@@ -34,6 +34,9 @@ export default function Recommendation() {
     }
   }, [result]);
 
+  useEffect(() => {
+    document.title = "Recommendations | SmartStocks";
+  }, []);
   const getSmartSuggestions = (input) => {
     if (!input.trim()) return [];
     return fuse.search(input).map((r) => r.item);

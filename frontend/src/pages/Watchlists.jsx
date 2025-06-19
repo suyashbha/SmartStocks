@@ -112,6 +112,10 @@ function Watchlists() {
   };
 
   useEffect(() => {
+    document.title = "Watchlists | SmartStocks";
+  }, []);
+
+  useEffect(() => {
     const saved = localStorage.getItem("watchlists");
 
     if (saved) {
@@ -164,6 +168,8 @@ function Watchlists() {
   }));
   const selectedOption =
     options.find((opt) => opt.value === selectedListId) || null;
+
+    
   return (
     <div className="watchlists">
       <h2>Your Watchlists</h2>
