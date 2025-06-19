@@ -17,6 +17,12 @@
   align-items: center;
   padding-left: 2rem;
 }
+.logo {
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
 
 
 .nav-links {

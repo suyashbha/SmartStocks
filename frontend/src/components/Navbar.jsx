@@ -27,8 +27,8 @@ function Navbar() {
       <div className="left">
         <NavLink to="/" className="logo">
           <img src={icon} alt="SmartStocks Logo" />
-        </NavLink>
         <h1 className="nav-title">SmartStocks</h1>
+        </NavLink>
       </div>
       <div className="right">
         <DarkModeToggle />
