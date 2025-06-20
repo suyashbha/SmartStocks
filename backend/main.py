@@ -28,7 +28,7 @@ if frontend_url is None:
     raise ValueError("FRONTEND_URL is not set in the .env file!")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://smart-stocks-frontend.vercel.app"],
+    allow_origins=["https://smart-stocks.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
