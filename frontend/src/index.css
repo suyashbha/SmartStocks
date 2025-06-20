@@ -20,7 +20,6 @@ body {
 
 #root {
   min-height: 100vh;
-  width:98%;
 }
 .dark {
   filter: invert(0.92) hue-rotate(180deg) brightness(1.05) contrast(1.08);
