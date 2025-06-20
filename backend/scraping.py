@@ -5,7 +5,7 @@ from fastapi import HTTPException
 def fetch_company_essentials_from_ticker(symbol: str) -> dict:
     url = f"https://ticker.finology.in/company/{symbol.upper()}?mode=C"
     headers = {"User-Agent": "Mozilla/5.0"}
-    resp = requests.get(url, headers=headers, timeout=10)
+    resp = requests.get(url, headers=headers, timeout=20)
     if resp.status_code != 200:
         raise HTTPException(status_code=404, detail=f"Could not fetch Ticker page for '{symbol}'")
     soup = BeautifulSoup(resp.text, "html.parser")
