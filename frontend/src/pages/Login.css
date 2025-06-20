@@ -110,3 +110,14 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1.5rem;
+    margin:60px 5px;
+  }
+}
+

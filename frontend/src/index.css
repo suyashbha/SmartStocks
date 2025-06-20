@@ -13,11 +13,14 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #root {
   min-height: 100vh;
-  width:100%;
+  width:98%;
 }
 .dark {
   filter: invert(0.92) hue-rotate(180deg) brightness(1.05) contrast(1.08);

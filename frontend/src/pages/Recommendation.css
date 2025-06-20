@@ -363,6 +363,7 @@
 .empty-content p {
   color: #6B7280;        /* gray-500 */
   font-size: 1rem;
+  padding: auto 1rem;
 }
 
 

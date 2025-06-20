@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
-import './Login.css';
+import "./Login.css";
 
 function Login() {
   const { login, register, googleLogin } = useAuth();
@@ -12,15 +12,15 @@ function Login() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-      document.title = "Login | SmartStocks";
-    }, []);
+    document.title = "Login | SmartStocks";
+  }, []);
 
   const handleLogin = async () => {
     setError("");
     try {
-        await login({ username, password });
+      await login({ username, password });
     } catch (err) {
-      setError("Invalid credentials or user already exists");
+      setError("Invalid credentials");
     }
   };
 
@@ -93,10 +93,12 @@ function Login() {
         <span>OR</span>
       </div>
 
-      <GoogleLogin
-        onSuccess={handleGoogleSuccess}
-        onError={handleGoogleError}
-      />
+      <div className="google-login-wrapper">
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={handleGoogleError}
+        />
+      </div>
 
       {error && <p className="error">{error}</p>}
 
