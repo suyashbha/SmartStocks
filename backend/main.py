@@ -23,9 +23,12 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url is None:
+    raise ValueError("FRONTEND_URL is not set in the .env file!")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://smart-stocks-frontend.vercel.app/"],
+    allow_origins=[frontend_url],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
