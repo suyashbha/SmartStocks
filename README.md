@@ -6,7 +6,7 @@ SmartStocks is a full-stack personal stock analysis tool that uses fundamental m
 
 ## 🌐 Live Demo
 
-- **Frontend:** https://smart-stocks-frontend.vercel.app  
+- **Frontend:** https://smart-stocks.vercel.app  
 - **Backend API:** https://smartstocks-production.up.railway.app
 
 ---
