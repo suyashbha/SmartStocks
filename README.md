@@ -21,7 +21,7 @@ Check out the app live here:
   - Add/remove stocks dynamically
 - 🔍 Search bar with autocomplete and recent suggestions
 - ⚙️ Serverless backend with auto-reconnecting MongoDB
-- 💻 React-based responsive UI (no Next.js/Remix)
+- 💻 React-based responsive UI
 
 ---
 
