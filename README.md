@@ -39,7 +39,7 @@ Stocks are scored using a custom formula that combines multiple valuation and re
 | Backend   | FastAPI (Python)              |
 | Auth      | Google OAuth + JWT            |
 | Database  | MongoDB                       |
-| Deploy    | Railway (backend), Vercel (frontend) |
+| Deploy    | Render (backend), Vercel (frontend) |
 
 ---
 
